@@ -1,9 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 # # Version 1-All differences
-
-# In[82]:
 
 
 students = {
