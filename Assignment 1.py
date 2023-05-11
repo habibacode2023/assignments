@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 students=[  {"Mahmizər Həsənova":{"degree": "IT", "courses":["analytics", "statistics"], "no": 1234}},
     {"Mədinə Abdulsəmədova":{"degree": "Business Informatics", "courses":["analytics", "statistics"], "no": 1234}},
     {"Adil Rəhimov":{"degree": "Automation", "courses":["analytics"], "no": 1234}},
@@ -21,22 +15,22 @@ students=[  {"Mahmizər Həsənova":{"degree": "IT", "courses":["analytics", "st
     {"Niyyət Rzayev":{"degree": "Automation", "courses":["analytics"], "no": 1234}}
 ]
 #Create list for student's degree
-degree_students={}
+def func():
+    degree_students={}
 #If degrees are equal add student name to degree_students list
-for student in students:
-    degree=student[list(student.keys())[0]]["degree"]
-    if degree in degree_students:
-        degree_students[degree].append(student)
-    else:
-        degree_students[degree]=[student]
-#Create degree column with ":" for student name and surname         
-for degree, students in degree_students.items():
+    for student in students:
+        degree=student[list(student.keys())[0]]["degree"]
+        if degree in degree_students:
+            degree_students[degree].append(student)
+        else:
+            degree_students[degree]=[student]
+    return degree_students  
+    #Create degree column with ":" for student name and surname         
+for degree, students in func().items():
     print(degree+":")
     for student in students:
         print(list(student.keys())[0])
-
-
-# In[ ]:
+pass
 
 
 
