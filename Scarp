@@ -1,0 +1,26 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+url = "https://kontakt.az/komputerler/notebook/?cnt=96"
+req = requests.get(url)
+soup = BeautifulSoup(req.text, "lxml")
+#Find prices for all models
+mydivs = soup.find_all("span", {"class": "nprice"})
+
+names=soup.find_all("div",{"class":"name"})
+prices=[]
+models=[]
+for mydiv in mydivs:
+        if mydiv.attrs['class'] == ['nprice']:
+            price=(mydiv.text.replace("M",""))
+        prices.append(price)
+for name in names:
+        if name.attrs['class']==["name"]:
+            model=(name.text.replace("'","").replace("\n",""))
+            models.append(model)
+Data = {}
+
+for i in range(96):
+    Data[models[i]] = prices[i]
+
+print(Data)
