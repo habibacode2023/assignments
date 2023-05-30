@@ -1,5 +1,8 @@
+/*1) We can use Inner join*/
+/*If our table exists we delete*/
 drop table if exists `horoscope`;
 
+/*Create new table with id,sign,date_start,date_end cloumns*/
 CREATE TABLE IF NOT EXISTS sys.`horoscope` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `sign` VARCHAR(255) NOT NULL UNIQUE,
@@ -8,7 +11,7 @@ CREATE TABLE IF NOT EXISTS sys.`horoscope` (
 );
 CREATE INDEX `horoscope_idx_1` ON `horoscope`(`date_start`, `date_end`);
 
-
+/*Add values for columns*/
 INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Aries', '03-21', '04-20');
 INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Taurus', '04-21', '05-20');
 INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Gemini', '05-22', '06-21');
@@ -22,6 +25,7 @@ INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Capricorn', 
 INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Aquarius', '01-21', '02-19');
 INSERT INTO `horoscope` (`sign`, `date_start`, `date_end`) VALUES ('Pisces', '02-20', '03-20');
 
+/*Start use inner join for joining our tables "nefer" and "horoscope"*/
 select *
 from horoscope where date_start > date_end
 ;
@@ -35,8 +39,10 @@ where (h.date_start > h.date_end
 or (h.date_start < h.date_end 
     and n.birthdate between str_to_date(concat(year(birthdate), h.date_start),'%Y%m-%d') and str_to_date(concat(year(birthdate), h.date_end),'%Y%m-%d')
    );
+ /*Select just showing only lastname,fistname,birthdate and sign columns our table*/  
    
    
+   /*2)This is general way for using case in our 'nefer' table */
    SELECT 
     CASE 
         WHEN (MONTH(birthdate) = 1 AND DAY(birthdate) <= 19) OR (MONTH(birthdate) = 12 AND DAY(birthdate) >= 22) THEN 'Capricorn'
@@ -54,3 +60,4 @@ or (h.date_start < h.date_end
      END AS horoscope_sign, firstname,lastname
 FROM 
    sys.`nefer`;
+   /*We see only fistname,lastname and horoscope_sign columns our table*
